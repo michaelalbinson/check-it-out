@@ -42,7 +42,7 @@ class BillManager:
 
 	@staticmethod
 	def get_bill_from_propublica_data(bill: dict):
-		return Bill(title=bill['name'], )
+		return Bill(title=bill['title'], )
 
 	def insert_bill(self, bill: Bill):
 		pass

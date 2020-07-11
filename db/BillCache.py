@@ -65,6 +65,11 @@ class BillCache:
                     bill_keyword.update({bill_id: weight + old_weight})
         return sorted(bill_keyword.items(), key=lambda x: x[1], reverse=True)
 
+    def get_all_keywords(self):
+        sql = 'SELECT * FROM `BILL_KEYWORDS`'
+        result = self.db.exec_select(sql).fetchall()
+        return result
+
     def check_cache(self, bill_id):
         session_num = int(bill_id[len(bill_id) - 3: len(bill_id)])
         result = self.congress_cache.get_congress_session(session_num)
