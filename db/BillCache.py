@@ -32,7 +32,7 @@ class BillCache:
         return result
 
     def get_bill_from_bill_id(self, bill_id):
-        sql = 'SELECT * FROM `BILL` WHERE BILL_ID=?'
+        sql = 'SELECT * FROM `BILL` WHERE ID=?'
         result = self.db.exec_select(sql, (bill_id,)).fetchone()
         return result
 

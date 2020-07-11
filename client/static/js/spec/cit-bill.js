@@ -20,11 +20,14 @@ class CITBill extends _BaseDOM {
     }
 
     render(data) {
-        this.appendChild(new ElementFactory(elements.H2, '', 'Bill - HR.204'));
+        this.appendChild(new ElementFactory(elements.H2, '', this._getTitle(data)));
         this.appendChild(new ElementFactory(elements.HR));
-        // this.appendChild(new ElementFactory(elements.P, '', AboutPage.CONTENT[0]));
-        // this.appendChild(new ElementFactory(elements.P, '', AboutPage.CONTENT[1]));
-        this.appendChild(new ElementFactory(elements.P, '', 'data here!'));s
+        this.appendChild(new ElementFactory());
+        this.appendChild(new ElementFactory(elements.P, 'align-left', data.summary));
+    }
+
+    _getTitle(data) {
+        return data.id.split('-')[0].toUpperCase() + ' - ' + (data.short_title || data.title);
     }
 }
 

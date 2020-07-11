@@ -2,18 +2,18 @@ from bills.ExtractiveSummarizer import ExtractiveSummarizer
 from db.model.ADBItem import ADBItem
 from bills.BillMetadataBuilder import BillMetadataBuilder
 from db.BillCache import BillCache
+from db.model.util.DateUtil import DateUtil
+
 """
 Class for interface with specific bills
 """
 
 
 class Bill(ADBItem):
-	_active = True
-	AUTHOR = ''
+	_author = ''
 	_bill_url = ''  # propublica.org url -- bill_uri
 	_committees = list()  # hold on to all associated committees in a list (using their committee codes)
 	_congress_url = ''  # congress.gov url
-	_long_summary = ''  # the actual summary (can be null)
 	_history = dict()  # dict of dicts for easy json conversion:
 	# {introduced: {date: <date>, success: <boolean>},
 	#	house: {...},
@@ -23,12 +23,17 @@ class Bill(ADBItem):
 
 	_number = ''
 	_slug = ''
-	_short_summary = ''  # refers to the title
+	_short_summary = None  # refers to the title
+	_long_summary = None  # the actual summary (can be null)
 	_sponsor_party = ''  # R, D or I
-	STATE = ''  # the easily human-readable version
-	TITLE = ''  # refers to the short_title
+	_state = ''  # the easily human-readable version
+	_title = ''  # refers to the short_title
+	_short_title = ''  # refers to the short_title
+	_session = None
+	_introduced_date = None
 	_vetoed = False
-	BILL_ID = None
+	_enacted = False
+	_active = False
 
 	def __init__(self):
 		pass
@@ -41,29 +46,55 @@ class Bill(ADBItem):
 		print(all_words)
 		result = BillCache().get_top_bills_from_keywords(all_words)
 		print(result)
-		return result
+
+		return [Bill().get(res[0]).as_short_form_dict() for res in result[:100]]
 
 	def save(self):
 		pass
 
 	def get(self, _id):
-		pass
+		result = BillCache().get_bill_from_bill_id(_id)
+		self._from_db(result)
+		return self
 
 	""" Helper Methods """
 
 	def as_dict(self):
 		return {
-			'bill_id': self._id,
-			'state': self.STATE,
-			'author': self.AUTHOR,
-			'name': self.TITLE
+			'id': self._id,
+			'state': self._state,
+			'author': self._author,
+			'title': self._title,
+			'short_title': self._short_title,
+			'summary': self._long_summary,
+			'active': self._active
+		}
+
+	def as_short_form_dict(self):
+		return {
+			'id': self._id,
+			'author': self._author,
+			'introduced': DateUtil.ord_to_iso(self._introduced_date),
+			'title': self._title,
+			'short_title': self._short_title,
+			'summary': self._long_summary,
+			'active': self._active
 		}
 
 	def _from_db(self, db_object):
-		self.TITLE = db_object.get('TITLE')
-		self.AUTHOR = db_object.get('AUTHOR')
-		self.BILL_ID = db_object.get('BILL_ID')
-		self._id = db_object.get('id')
+		self._title = db_object.get('TITLE')
+		self._short_title = db_object.get('SHORT_TITLE')
+		self._author = db_object.get('AUTHOR')
+		self._id = db_object.get('ID')
+		self._session = db_object.get("SESSION")
+		self._long_summary = db_object.get("SUMMARY")
+		self._bill_url = db_object.get("BILL_URL")
+		self._introduced_date = db_object.get("INTRODUCED_DATE")
+		self._latest_major_action = db_object.get("LATEST_MAJOR_ACTION")
+
+		self._active = ADBItem.to_bool(db_object.get("ACTIVE"))
+		self._enacted = ADBItem.to_bool(db_object.get("ENACTED"))
+		self._vetoed = ADBItem.to_bool(db_object.get("VETOED"))
 
 	@staticmethod
 	def from_db(db_object):

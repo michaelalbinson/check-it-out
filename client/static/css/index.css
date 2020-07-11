@@ -20,7 +20,7 @@ body {
     background-color: var(--background-color);
 }
 
-h1, h2 {
+h1.fancy, h2.fancy {
     font-family: 'attraction', sans-serif;
 }
 

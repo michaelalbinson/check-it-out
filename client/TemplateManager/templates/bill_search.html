@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block css_includes %}
+    <link rel="stylesheet" href="css/index.css">
+{% endblock %}
+{% block js_includes %}
+    <script type="text/javascript" src="/js/util/state-map.js"></script>
+    <script type="text/javascript" src="/alb-js/table/managed-table.js"></script>
+    <script type="text/javascript" src="/js/table/cit-bill-search-list.js"></script>
+{% endblock %}
+{% block body %}
+    <cit-bill-search-list></cit-bill-search-list>
+{% endblock %}

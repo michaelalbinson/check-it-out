@@ -18,3 +18,7 @@ def bill_client_routes(app):
     def get_bill(bill_id):
         print(bill_id)
         return template_manager.get_template('bill.html')
+
+    @app.route("/bill/search", methods=['GET'])
+    def get_bill_client_search():
+        return template_manager.get_template('bill_search.html')

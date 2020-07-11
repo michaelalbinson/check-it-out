@@ -36,5 +36,9 @@ class ADBItem:
 		raise ValueError('Method must be overridden')
 
 	@staticmethod
+	def to_bool(val):
+		return not not val
+
+	@staticmethod
 	def from_db(db_object):
 		raise ValueError('Method must be overridden')
