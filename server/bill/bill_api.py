@@ -17,3 +17,16 @@ def bill_api_routes(app):
         }
 
         return json.dumps(data)
+
+    @app.route("/api/bill/search/<string:terms>", methods=['GET'])
+    def get_bill_search(terms):
+        bills = Bill.search(terms)
+        if bills is None:
+            return json.dumps({'success': False})
+
+        data = {
+            'success': True,
+            'data': bills
+        }
+
+        return json.dumps(data)
