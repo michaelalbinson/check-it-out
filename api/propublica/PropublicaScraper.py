@@ -113,5 +113,21 @@ class PropublicaScraper:
             err_file.write(message + '\n')
             err_file.write(text + '/n')
 
+    @staticmethod
+    def get_committees(session, chamber):
+        header = {'X-API-Key': conf.PROPUBLICA_API_KEY}
+        res = requests.get('https://api.propublica.org/congress/v1/' + str(session) + '/' + chamber
+                           +'/committees.json', headers=header)
 
+        if res.status_code != 200:
+            PropublicaScraper.log_error('ERROR: Could not retrieve data for session ' + str(session) +
+                                        ' and chamber ' + chamber, res.text)
+
+        data = res.json()
+        # for committees in data.get('results')[0].get('committees'):
+        #     print(committees.get('name'))
+        return data.get('results')[0].get('committees')
+
+
+PropublicaScraper.get_committees(110, 'joint')
 # print(PropublicaScraper.get_senators())
