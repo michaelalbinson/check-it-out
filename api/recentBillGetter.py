@@ -14,7 +14,7 @@ def get_recent_bills():
 
 	js = json.loads(response.content)
 	print(js)
-	for bill in js['results'][0]['bills']:
+	for bill in js['results'][0]['summarization']:
 		bill_item = b_manager.get_bill_from_propublica_data(bill)
 		b_manager.insert_bill(bill_item)
 
@@ -25,11 +25,11 @@ def get_recent_bills():
 def test_propublica_congress_number(current_congress: int):
 	header = {'X-API-Key': '7vbxYrafGzoLQb6IJtaubinW3pHhmv2EImvro1g3'}
 	response = requests.get(
-		'https://api.propublica.org/congress/v1/' + str(current_congress) + '/house/bills/active.json', headers=header)
+		'https://api.propublica.org/congress/v1/' + str(current_congress) + '/house/summarization/active.json', headers=header)
 
 	if response.status_code == 200:
 		response2 = requests.get(
-			'https://api.propublica.org/congress/v1/' + str(current_congress + 1) + '/house/bills/active.json',
+			'https://api.propublica.org/congress/v1/' + str(current_congress + 1) + '/house/summarization/active.json',
 			headers=header)
 		if response2.status_code == 200:
 			return current_congress + 1

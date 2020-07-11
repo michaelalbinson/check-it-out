@@ -1,11 +1,11 @@
-from bills.ExtractiveSummarizer import ExtractiveSummarizer
+from db.summarization import ExtractiveSummarizer
 from db.model.ADBItem import ADBItem
-from bills.BillMetadataBuilder import BillMetadataBuilder
+from db.summarization import BillMetadataBuilder
 from db.BillCache import BillCache
 from db.model.util.DateUtil import DateUtil
 
 """
-Class for interface with specific bills
+Class for interface with specific summarization
 """
 
 

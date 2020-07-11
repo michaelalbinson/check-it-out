@@ -5,9 +5,9 @@
 # Congress introduces a particular bill annually and will arrange with the chamber's leadership to reserve a certain
 # bill number.
 #
-# Public bills pertain to matters that affect the general public or classes of citizens, while private bills pertain to
+# Public summarization pertain to matters that affect the general public or classes of citizens, while private summarization pertain to
 # individual matters that affect individuals and organizations, such as claims against the federal government (private
-# bills are not as prevalent as they once were).
+# summarization are not as prevalent as they once were).
 BILL_TYPES = ['hr', 's']
 
 # A joint resolution is a legislative proposal that requires the approval of both chambers and the signature

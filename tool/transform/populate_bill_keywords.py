@@ -1,6 +1,6 @@
 # Use to populate bill keywords table in database
 from db.BillCache import BillCache
-from bills.BillMetadataBuilder import BillMetadataBuilder
+from db.summarization import BillMetadataBuilder
 from sqlite3 import IntegrityError
 
 bill_cache = BillCache()

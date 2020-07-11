@@ -10,7 +10,7 @@ class BillDataRepairer():
         with open('z_tmp_json.json') as j:
             data = json.load(j)
             session_bills = dict()
-            for bill in data['results'][0]['bills']:
+            for bill in data['results'][0]['summarization']:
                 bill_id = bill['bill_id']
                 session_bills[bill_id] = bill
 

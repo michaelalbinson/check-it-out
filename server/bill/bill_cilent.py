@@ -2,7 +2,7 @@ from client.TemplateManager.TemplateManager import template_manager
 
 
 def bill_client_routes(app):
-    @app.route("/bills", methods=['GET'])
+    @app.route("/summarization", methods=['GET'])
     def get_bills():
         return template_manager.get_template('bill.html')
 

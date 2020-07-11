@@ -2,7 +2,7 @@ import json
 from db.legacy.DBItem import DBItem
 
 """
-Class for interface with specific bills
+Class for interface with specific summarization
 """
 
 

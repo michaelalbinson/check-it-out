@@ -1,4 +1,4 @@
-from bills.BillMetadataBuilder import BillMetadataBuilder
+from db.summarization import BillMetadataBuilder
 from nltk.stem.snowball import SnowballStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 from sklearn.feature_extraction.text import CountVectorizer

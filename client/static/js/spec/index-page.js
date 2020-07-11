@@ -44,7 +44,7 @@ class IndexPage extends _BaseDOM {
         this._searchDiv.appendChild(new ElementFactory(elements.BR));
         this._searchDiv.appendChild(new ElementFactory(elements.BR));
 
-        const popularBills = new ElementFactory(elements.DIV, 'popular-bills');
+        const popularBills = new ElementFactory(elements.DIV, 'popular-summarization');
         popularBills.appendChild(new ElementFactory(elements.BUTTON, 'btn btn-sm btn-primary', 'Bill 1'));
         popularBills.appendChild(new ElementFactory(elements.BUTTON, 'btn btn-sm btn-primary', 'Bill 2'));
         popularBills.appendChild(new ElementFactory(elements.BUTTON, 'btn btn-sm btn-primary', 'Bill 3'));

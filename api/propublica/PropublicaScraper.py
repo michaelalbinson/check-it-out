@@ -67,7 +67,7 @@ class PropublicaScraper:
 
             print('Bill series: ' + str(session) + '/introduced/' + str(offset))
             res = requests.get('https://api.propublica.org/congress/v1/' + str(session) + '/' +
-                               chamber + '/bills/introduced.json?offset=' + str(offset),
+                               chamber + '/summarization/introduced.json?offset=' + str(offset),
                                headers=header)
 
             if res.status_code != 200:
@@ -82,16 +82,16 @@ class PropublicaScraper:
 
             try:
                 data = res.json()
-                retrieved = len(data['results'][0]['bills'])
+                retrieved = len(data['results'][0]['summarization'])
 
                 # if we got no results we should stop making requests :)
                 if retrieved == 0:
-                    print('Retrieved 0 bills, finishing...')
+                    print('Retrieved 0 summarization, finishing...')
                     break
 
-                print('Retrieved ' + str(retrieved) + ' bills... Storing')
+                print('Retrieved ' + str(retrieved) + ' summarization... Storing')
 
-                for bill in data['results'][0]['bills']:
+                for bill in data['results'][0]['summarization']:
                     bill_id = bill['bill_id']
                     session_bills[bill_id] = bill
             except json.decoder.JSONDecodeError:
