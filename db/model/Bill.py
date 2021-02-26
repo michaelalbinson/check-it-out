@@ -40,13 +40,12 @@ class Bill(ADBItem):
 
 	@staticmethod
 	def search(string):
-		result = BillMetadataBuilder.get_stripped_bag_of_words(string)
+		result = BillMetadataBuilder.BillMetadataBuilder.get_stripped_bag_of_words(string)
 		all_words = set(result)
-		all_words = ExtractiveSummarizer.stem_list(all_words)
-		print(all_words)
+		all_words = ExtractiveSummarizer.ExtractiveSummarizer.stem_list(all_words)
+		# print(all_words)
 		result = BillCache().get_top_bills_from_keywords(all_words)
-		print(result)
-
+		# print(result)
 		return [Bill().get(res[0]).as_short_form_dict() for res in result[:100]]
 
 	def save(self):
