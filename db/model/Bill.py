@@ -81,6 +81,9 @@ class Bill(ADBItem):
 		}
 
 	def _from_db(self, db_object):
+		if db_object is None:
+			return
+
 		self._title = db_object.get('TITLE')
 		self._short_title = db_object.get('SHORT_TITLE')
 		self._author = db_object.get('AUTHOR')

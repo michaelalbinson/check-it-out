@@ -1,5 +1,4 @@
 import json
-from client.TemplateManager.TemplateManager import template_manager
 from db.model.Bill import Bill
 
 
@@ -32,5 +31,5 @@ def bill_api_routes(app):
         #     'data': bills
         # }
         # print(data)
-        # return template_manager.get_template('bill_search.html', render_args=data)
+        # return template_manager.get_template('bills.html', render_args=data)
         return json.dumps(data)

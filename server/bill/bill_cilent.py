@@ -19,14 +19,6 @@ def bill_client_routes(app):
         print(bill_id)
         return template_manager.get_template('bill.html')
 
-    @app.route("/bill/search/<string:terms>", methods=['GET'])
-    def get_bill_client_search(terms):
-        bills = Bill.search(terms)
-        print(terms)
-        print(bills)
-        if bills is None or bills == []:
-            return template_manager.get_template('bill_not_found.html')
-        data = {}
-        data['success'] = True
-        data['data'] = bills
-        return template_manager.get_template('bill_search.html')
+    @app.route("/bills", methods=['GET'])
+    def get_bill_client_search():
+        return template_manager.get_template('bills.html')
