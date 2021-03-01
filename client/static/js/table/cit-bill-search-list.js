@@ -7,7 +7,7 @@ class CITBillSearchList extends ManagedTable {
     }
 
     apiRequest(successCallback, errorCallback) {
-        request('/api/bill/search/' + window.top.getURLParameter('q'), {}, successCallback, errorCallback, request.METHODS.GET);
+        request('/api/bill/search/' + (window.top.getURLParameter('q') || ''), {}, successCallback, errorCallback, request.METHODS.GET);
     }
 
     getRow(dataRow, htmlRow) {

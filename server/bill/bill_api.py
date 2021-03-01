@@ -1,4 +1,6 @@
 import json
+
+from db.BillCache import BillCache
 from db.model.Bill import Bill
 
 
@@ -16,20 +18,18 @@ def bill_api_routes(app):
 
         return json.dumps(data)
 
+    @app.route("/api/bill/search/", methods=['GET'])
+    def get_all_bills():
+        bills = Bill.get_all()
+        if bills is None:
+            return json.dumps({'success': False})
+
+        return json.dumps({'success': True, 'data': bills})
+
     @app.route("/api/bill/search/<string:terms>", methods=['GET'])
     def get_bill_search(terms):
         bills = Bill.search(terms)
         if bills is None:
-            # return template_manager.get_template('bill_not_found.html')
             return json.dumps({'success': False})
 
-        data = {}
-        data['success'] = True
-        data['data'] = bills
-        # data = {
-        #     'success': True,
-        #     'data': bills
-        # }
-        # print(data)
-        # return template_manager.get_template('bills.html', render_args=data)
-        return json.dumps(data)
+        return json.dumps({'success': True, 'data': bills})

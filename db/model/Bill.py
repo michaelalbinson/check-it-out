@@ -48,6 +48,11 @@ class Bill(ADBItem):
 		# print(result)
 		return [Bill().get(res[0]).as_short_form_dict() for res in result[:100]]
 
+	@staticmethod
+	def get_all():
+		bills = BillCache().get_all_bills()
+		return [Bill()._from_db(bill).as_short_form_dict() for bill in bills[:100]]
+
 	def save(self):
 		pass
 
@@ -97,6 +102,8 @@ class Bill(ADBItem):
 		self._active = ADBItem.to_bool(db_object.get("ACTIVE"))
 		self._enacted = ADBItem.to_bool(db_object.get("ENACTED"))
 		self._vetoed = ADBItem.to_bool(db_object.get("VETOED"))
+
+		return self
 
 	@staticmethod
 	def from_db(db_object):
