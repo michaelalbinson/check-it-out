@@ -13,6 +13,7 @@ class ConfReader:
             self.PROPUBLICA_API_KEY = data['PROPUBLICA_API_KEY']
             self.PORT = data['PORT']
             self.CURRENT_CONGRESS = data['CURRENT_CONGRESS']
+            self.FEC_API_KEY = data['FEC_API_KEY']
 
 
 conf = ConfReader()
