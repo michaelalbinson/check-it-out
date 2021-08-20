@@ -2,18 +2,22 @@ import json
 
 from db.BillCache import BillCache
 from db.model.Bill import Bill
+from db.summarization.ExtractiveSummarizer import ExtractiveSummarizer
 
 
 def bill_api_routes(app):
     @app.route("/api/bill/<string:bill_id>", methods=['GET'])
     def get_bill_api(bill_id):
         bill = Bill().get(bill_id)
+        short_summary = ExtractiveSummarizer(bill.as_dict()).get_summary()
+        dict_bill = bill.as_dict()
+        dict_bill.update({'short_summary': short_summary})
         if bill is None:
             return json.dumps({'success': False})
 
         data = {
             'success': True,
-            'data': bill.as_dict()
+            'data': dict_bill
         }
 
         return json.dumps(data)

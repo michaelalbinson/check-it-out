@@ -16,7 +16,7 @@ class ExtractiveSummarizer:
     def __init__(self, bill, title_multiplier=0.01, mode='basic'):
         self.mode = mode
         self.bill = bill
-        self.builder = BillMetadataBuilder(bill)
+        self.builder = BillMetadataBuilder.BillMetadataBuilder(bill)
         self.corpus = self.bill['title'] + ' ' + self.bill['summary']
         self.body_len = len(self.bill['summary'])
 
@@ -33,11 +33,11 @@ class ExtractiveSummarizer:
 
     def get_summary(self):
         if self.mode == 'basic':
-            self.get_first_n_summary()
+            return self.get_first_n_summary()
         elif self.mode == 'best_n':
-            self.get_best_n_summary()
+            return self.get_best_n_summary()
         else:
-            self.get_similarity_summary()
+            return self.get_similarity_summary()
 
     """ SUMMARIZATION METHODS """
 

@@ -95,6 +95,7 @@ class Bill(ADBItem):
 		self._id = db_object.get('ID')
 		self._session = db_object.get("SESSION")
 		self._long_summary = db_object.get("SUMMARY")
+		# self._long_summary = ExtractiveSummarizer.ExtractiveSummarizer(db_object).get_summary()
 		self._bill_url = db_object.get("BILL_URL")
 		self._introduced_date = db_object.get("INTRODUCED_DATE")
 		self._latest_major_action = db_object.get("LATEST_MAJOR_ACTION")

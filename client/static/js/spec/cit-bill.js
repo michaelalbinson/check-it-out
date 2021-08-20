@@ -20,10 +20,13 @@ class CITBill extends _BaseDOM {
     }
 
     render(data) {
+        console.log(data);
         this.appendChild(new ElementFactory(elements.H2, '', this._getTitle(data)));
         this.appendChild(new ElementFactory(elements.HR));
-        this.appendChild(new ElementFactory());
-        this.appendChild(new ElementFactory(elements.P, 'align-left', data.summary));
+        this.appendChild(new ElementFactory(elements.H3, '', 'Summary'));
+        this.appendChild(new ElementFactory(elements.P, 'align-left', data.short_summary));
+        this.appendChild(new ElementFactory(elements.H3, '', 'Actual Bill'));
+        this.appendChild(new ElementFactory(elements.P, 'align-left', data.summary))
     }
 
     _getTitle(data) {
