@@ -1,6 +1,7 @@
 from client.TemplateManager.TemplateManager import template_manager
 from db.model.Bill import Bill
 
+
 def bill_client_routes(app):
     @app.route("/summarization", methods=['GET'])
     def get_bills():
