@@ -129,5 +129,5 @@ class PropublicaScraper:
         return data.get('results')[0].get('committees')
 
 
-PropublicaScraper.get_committees(110, 'joint')
-# print(PropublicaScraper.get_senators())
+# PropublicaScraper.get_committees(110, 'joint')
+print(PropublicaScraper.get_senators())
