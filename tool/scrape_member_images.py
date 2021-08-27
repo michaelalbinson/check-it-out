@@ -1,13 +1,15 @@
 from db.HouseMemberCache import HouseMemberCache
+from db.SenateMemberCache import SenateMemberCache
 import requests
 import os
 import time
 
 house_cache = HouseMemberCache()
+senate_cache = SenateMemberCache()
 
 
-def scrape_house_member_images():
-    all_members = house_cache.get_all()
+def scrape_member_images(cache):
+    all_members = cache.get_all()
 
     for member in all_members:
         html = requests.get("https://www.congress.gov/img/member/" + str(member.get('ID')).lower() + ".jpg")
@@ -22,4 +24,5 @@ def scrape_house_member_images():
         time.sleep(1)
 
 
-scrape_house_member_images()
+scrape_member_images(house_cache)
+scrape_member_images(senate_cache)

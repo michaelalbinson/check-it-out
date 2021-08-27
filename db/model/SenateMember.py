@@ -1,4 +1,5 @@
 from db.model.ACongressionalMember import ACongressionalMember
+from db.SenateMemberCache import SenateMemberCache
 
 
 class SenateMember(ACongressionalMember):
@@ -17,14 +18,22 @@ class SenateMember(ACongressionalMember):
     def as_dict(self):
         data = self.get_base_member_dict()
         data['senate_class'] = self.SENATE_CLASS
-        data['senate_rank'] = self.SENATE_RANK
+        data['state_rank'] = self.STATE_RANK
         return data
 
     def _from_db(self, db_row):
         self.set_common_member_fields(db_row)
         self.SENATE_CLASS = db_row["SENATE_CLASS"]
-        self.SENATE_RANK = db_row["SENATE_RANK"]
+        self.STATE_RANK = db_row["STATE_RANK"]
         return self
+
+    @staticmethod
+    def get_all():
+        all_structured_members = []
+        all_members = SenateMemberCache().get_all()
+        for member in all_members:
+            all_structured_members.append(SenateMember.from_db(member).as_dict())
+        return all_structured_members
 
     @staticmethod
     def from_db(db_object):

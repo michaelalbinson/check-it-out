@@ -23,7 +23,10 @@ class APolitician(ADBItem):
         self.FIRST_NAME = db_object.get('FIRST_NAME')
         self.MIDDLE_NAME = db_object.get('MIDDLE_NAME')
         self.LAST_NAME = db_object.get('LAST_NAME')
-        self.DATE_OF_BIRTH = date.fromordinal(db_object.get('DATE_OF_BIRTH'))
+        dob = db_object.get('DATE_OF_BIRTH')
+        if dob == 0:
+            dob = 1
+        self.DATE_OF_BIRTH = date.fromordinal(dob)
         self.GENDER = db_object.get('GENDER')
         self.PARTY = db_object.get('PARTY')
         self.LEADERSHIP_ROLE = db_object.get('LEADERSHIP_ROLE')

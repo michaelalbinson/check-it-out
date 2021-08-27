@@ -45,6 +45,7 @@ class CITMember extends _BaseDOM {
         }
         this.appendChild(new ElementFactory(elements.P, '', 'Twitter account handle: ' + data.twitter_account));
         this.appendChild(new ElementFactory(elements.P, '', 'Total votes with party: ' + data.votes_with_party_pct + "%"));
+        this.appendChild(new ElementFactory(elements.P, '', 'Missed votes: ' + data.missed_votes_pct + "%"));
         this.appendChild(new IconLinkElement('/assets/state/' + window.STATE_MAP[data.state.toLowerCase()], data.state, data.state))
     }
 }
