@@ -11,6 +11,8 @@ def scrape_house_member_images():
 
     for member in all_members:
         html = requests.get("https://www.congress.gov/img/member/" + str(member.get('ID')).lower() + ".jpg")
+        if html.status_code == 404:
+            html = requests.get("https://www.congress.gov/img/member/" + str(member.get('ID')).lower() + "_200.jpg")
         object_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'client', 'static', 'assets',
                                    'members', member.get('FIRST_NAME').lower() + member.get('LAST_NAME').lower() +
                                     '.jpg')
